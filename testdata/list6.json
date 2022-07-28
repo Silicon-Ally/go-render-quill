@@ -1,0 +1,14 @@
+[
+    {
+        "insert": "Something"
+    },
+    {
+        "attributes": {
+            "list": "ordered"
+        },
+        "insert": "\n\n"
+    },
+    {
+        "insert": "\n"
+    }
+]
