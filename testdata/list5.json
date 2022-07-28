@@ -1,0 +1,23 @@
+[
+    {
+        "insert": "Something"
+    },
+    {
+        "attributes": {
+            "list": "ordered"
+        },
+        "insert": "\n"
+    },
+    {
+        "insert": "Something else"
+    },
+    {
+        "attributes": {
+            "list": "ordered"
+        },
+        "insert": "\n\n\n"
+    },
+    {
+        "insert": "\n"
+    }
+]

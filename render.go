@@ -24,7 +24,6 @@ func Render(ops []byte) ([]byte, error) {
 // customize the way certain kinds of inserts are rendered, and returns the rendered HTML. If the given Formatter is nil,
 // then the default one that is built in is used. If an error occurs while rendering, any HTML already rendered is returned.
 func RenderExtended(ops []byte, customFormats func(string, *Op) Formatter) ([]byte, error) {
-
 	raw := make([]rawOp, 0, 12)
 	if err := json.Unmarshal(ops, &raw); err != nil {
 		return nil, err
@@ -68,13 +67,10 @@ func RenderExtended(ops []byte, customFormats func(string, *Op) Formatter) ([]by
 
 				// If the current o.Data still has an "\n" following (its not the last in split), then it ends a block.
 				if j < len(split)-1 {
-
 					vars.o.writeBlock(&vars)
-
 				} else if vars.o.Data != "" { // If the last element in split is just "" then the last character in the rawOp is "\n".
 
 					vars.o.writeInline(&vars)
-
 				}
 
 			}
@@ -90,7 +86,6 @@ func RenderExtended(ops []byte, customFormats func(string, *Op) Formatter) ([]by
 	vars.fs.closePrevious(&vars.finalBuf, blankOp(), true)
 
 	return vars.finalBuf.Bytes(), nil
-
 }
 
 // renderVars combines the variables created in RenderExtended into a single allocation.
@@ -142,7 +137,6 @@ type Op struct {
 // The opening HTML tag of a block element is written to the main buffer only after the "\n" character terminating the
 // block is reached (the Op with the "\n" character holds the information about the block element).
 func (o *Op) writeBlock(vars *renderVars) {
-
 	// Close the inline formats opened within the block to the tempBuf and block formats of wrappers to finalBuf.
 	closedTemp := make(formatState, 0, 1)
 
@@ -234,12 +228,10 @@ func (o *Op) writeBlock(vars *renderVars) {
 	}
 
 	vars.tempBuf.Reset()
-
 }
 
 // writeInline writes to the temporary buffer.
 func (o *Op) writeInline(vars *renderVars) {
-
 	vars.fs.closePrevious(&vars.tempBuf, o, false)
 
 	// Save the formats being written now separately from fs.
@@ -264,7 +256,6 @@ func (o *Op) writeInline(vars *renderVars) {
 	vars.fs = append(vars.fs, addNow...) // Copy after the sorting.
 
 	vars.tempBuf.WriteString(o.Data)
-
 }
 
 // HasAttr says if the Op is not nil and has the attribute set to a non-blank value.
@@ -275,7 +266,6 @@ func (o *Op) HasAttr(attr string) bool {
 // getFormatter returns a formatter based on the keyword (either "text" or "" or an attribute name) and the Op settings.
 // For every Op, first its Type is passed through here as the keyword, and then its attributes.
 func (o *Op) getFormatter(keyword string, customFormats func(string, *Op) Formatter) Formatter {
-
 	if customFormats != nil {
 		if custom := customFormats(keyword, o); custom != nil {
 			return custom
@@ -348,7 +338,6 @@ func (o *Op) getFormatter(keyword string, customFormats func(string, *Op) Format
 	}
 
 	return nil
-
 }
 
 // A FormatPlace is either an HTML tag name, a CSS class, or a style attribute value.

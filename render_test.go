@@ -8,7 +8,6 @@ import (
 )
 
 func TestSimple(t *testing.T) {
-
 	cases := map[string]struct {
 		ops  string
 		want string
@@ -84,16 +83,13 @@ func TestSimple(t *testing.T) {
 			}
 		})
 	}
-
 }
 
 func TestRender(t *testing.T) {
-
-	pairNames := []string{"ops1", "nested", "ordering", "list1", "list2", "list3", "list4", "indent", "code1", "code2", "code3"}
+	pairNames := []string{"ops1", "nested", "ordering", "list1", "list2", "list3", "list4", "list5", "list6", "indent", "code1", "code2", "code3"}
 
 	for _, n := range pairNames {
 		t.Run(n, func(t *testing.T) {
-
 			ops, err := ioutil.ReadFile("./testdata/" + n + ".json")
 			if err != nil {
 				t.Fatalf("could not read %s.json; %s", n, err)
@@ -112,10 +108,8 @@ func TestRender(t *testing.T) {
 			if !bytes.Equal(html, got) {
 				t.Errorf("bad rendering:\nwanted: \n%s\ngot: \n%s", html, got)
 			}
-
 		})
 	}
-
 }
 
 func TestClassesList(t *testing.T) {
